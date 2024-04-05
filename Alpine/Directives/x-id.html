@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x-id</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-6/6">
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3" >x-id</h3>
+            <div x-data="{ inputCount: 0 }">
+                <div >
+                    <button @click="inputCount++">Add Input Field</button>
+                </div>
+            
+                <template x-for="i in inputCount" :key="i">
+                    <div x-id="['Ankush']">
+                        <label :for="$id('Ankush') + '-' + i" x-text="'Username'+' '+ i"></label>
+                        <input type="text" :id="$id('Ankush') + '-' + i">
+                    </div>
+                </template>
+
+            </div>
+
+         <div x-data>
+            <div x-id="['text-input']">
+                <label :for="$id('text-input')">Username</label>
+                <!-- for="text-input-1" -->
+             
+                <input type="text" :id="$id('text-input')">
+                <!-- id="text-input-1" -->
+            </div>
+             
+            <div  x-id="['text-input']">
+                <label :for="$id('text-input')">Username</label>
+                <!-- for="text-input-2" -->
+             
+                <input type="text" :id="$id('text-input')">
+                <!-- id="text-input-2" -->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>             

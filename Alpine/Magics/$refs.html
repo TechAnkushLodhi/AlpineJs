@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$refs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-6/6">
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">$refs</h3>
+        <div x-data="{ formData: { field1: '', field2: '', field3: '' }, submitForm() { 
+            this.$refs.input1.placeholder ='input1';
+            this.$refs.input2.placeholder ='input2';
+            this.$refs.input3.placeholder ='input3';
+            }
+          }">
+            <form @submit.prevent="submitForm">
+                <input type="text" x-ref="input1" x-model="formData.field1" placeholder>
+                <input type="text" x-ref="input2" x-model="formData.field2">
+                <input type="text" x-ref="input3" x-model="formData.field3">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        
+
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Limitations</h3>
+
+
+
+        <div x-data="{ items: [
+            { id: 1, name: 'item1' },
+            { id: 2, name: 'item2' },
+            { id: 3, name: 'item3' }
+        ] }">
+        <template x-for="item in items" :key="item.id">
+            <div :x-ref="item.name" >
+                <p x-text="'This is content for : '+item.name"></p>
+            </div>
+        </template>
+    </div>
+    
+        
+        
+       
+    </div>
+</div>
+</body>
+</html>             

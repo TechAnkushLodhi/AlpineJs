@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x-bind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-5/6">
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">x-bind</h3>
+        <div x-data="{placeholder:'type here..'}">
+            <input x-bind:placeholder="placeholder" type="text">  
+            <!-- Shorthand syntax -->
+            <input type="text" :placeholder="placeholder">
+        </div>
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Binding classes</h3>
+        <!-- open -->
+        <div x-data="{ open: false }">
+            <button @click="open = ! open">Toggle Dropdown</button>
+         
+            <div :class="open ? '' : 'hidden'">
+                Dropdown Contents...
+            </div>
+            <!-- Shorthand conditionals -->
+            <div :class="open||'hidden'">
+                Shorthand Contents...
+            </div>
+        </div>
+        <!-- closed -->
+        <div x-data="{ closed: false }">
+            <button class="mt-4" @click="closed = ! closed">Toggle Dropdown</button>
+         
+            <div :class="closed ? 'hidden' : ''">
+                Dropdown Contents...
+            </div>
+            <!-- Shorthand conditionals -->
+            <div :class="closed && 'hidden'">
+                Shorthand Contents...
+            </div>
+        </div>
+
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Class object syntax</h3>
+        <div x-data="{show:true}">
+            <div :class="{ 'hidden': ! show }">
+                <p>Class object syntax </p>
+            </div>
+            <div  class="hidden" :class="{ 'hidden': show }">
+                <p>Class object syntax</p>
+            </div>
+        </div>
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Special behavior</h3>
+          <div x-data="{hide:true}">
+            <div class="opacity-50" :class="hide && 'hidden'">
+                <p x-text="'hidden'"></p>
+            </div>
+            <div class="opacity-50 " :class="!hide && 'hidden'">
+                <p x-text="'hidden'"></p>
+            </div>
+          </div>
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Binding styles</h3>
+        <div x-data>
+            <ul :style="{ color: 'red', display: 'flex' }">
+               <li>First</li>
+               <li>Second</li>
+            </ul>
+            <div x-bind:style="true && { color: 'red' }">
+                <p>this</p>
+            </div>
+        </div>
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Binding Alpine Directives Directly</h3>
+        <div x-data="dropdown()">
+            <button x-bind="trigger">Open Dropdown</button>
+                 <br>
+            <span x-bind="dialogue">Dropdown Contents</span>
+        </div>
+         
+        <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('dropdown', () => ({
+                    open: false,
+         
+                    trigger: {
+                        ['x-ref']: 'trigger',
+                        ['@click']() {
+                            this.open = true
+                        },
+                    },
+         
+                    dialogue: {
+                        ['x-show']() {
+                            return this.open
+                        },
+                        ['@click.outside']() {
+                            this.open = false
+                        },
+                    },
+                }))
+            })
+        </script>
+    </div>
+
+</div>
+</body>
+</html>        

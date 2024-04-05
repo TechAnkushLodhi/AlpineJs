@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x-if</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-6/6">
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">x-if</h3>
+          <div x-data="{open:false}">
+            <button @click="open=!open">Dropdown</button>
+            <template x-if="open">
+                <table class="border-4 border-violet-600 mt-4 mb-4 my-4 mx-4">
+                    <tr class="border-4 border-violet-400">
+                        <th class="border-4 border-violet-400">name</th>
+                        <th class="border-4 border-violet-400">phone</th>
+                        <th class="border-4 border-violet-400">email</th>
+                        <th class="border-4 border-violet-400">address</th>
+                        <th class="border-4 border-violet-400">region</th>
+                        <th class="border-4 border-violet-400">list</th>
+                        <th class="border-4 border-violet-400">country</th>
+                        <th class="border-4 border-violet-400">text</th>
+                    </tr>
+                    <tr  class="border-4 border-violet-400">
+                        <td class="border-4 border-violet-400">Eugenia Haney</td>
+                        <td class="border-4 border-violet-400">(327) 267-5453</td>
+                        <td class="border-4 border-violet-400">nam.porttitor@yahoo.org</td>
+                        <td class="border-4 border-violet-400">P.O. Bo 919, 9065 Nibh Street</td>
+                        <td class="border-4 border-violet-400">Bahia</td>
+                        <td class="border-4 border-violet-400">3</td>
+                        <td class="border-4 border-violet-400">Mexico</td>
+                        <td class="border-4 border-violet-400">mollis lectus pede et risus. Quisque libero lacus, varius et,</td>
+                    </tr>
+                    <tr  class="border-4 border-violet-400">
+                        <td class="border-4 border-violet-400">Eugenia Haney</td>
+                        <td class="border-4 border-violet-400">(327) 267-5453</td>
+                        <td class="border-4 border-violet-400">nam.porttitor@yahoo.org</td>
+                        <td class="border-4 border-violet-400">P.O. Bo 919, 9065 Nibh Street</td>
+                        <td class="border-4 border-violet-400">Bahia</td>
+                        <td class="border-4 border-violet-400">3</td>
+                        <td class="border-4 border-violet-400">Mexico</td>
+                        <td class="border-4 border-violet-400">mollis lectus pede et risus. Quisque libero lacus, varius et,</td>
+                    </tr>
+                    <tr  class="border-4 border-violet-400">
+                        <td class="border-4 border-violet-400">Eugenia Haney</td>
+                        <td class="border-4 border-violet-400">(327) 267-5453</td>
+                        <td class="border-4 border-violet-400">nam.porttitor@yahoo.org</td>
+                        <td class="border-4 border-violet-400">P.O. Bo 919, 9065 Nibh Street</td>
+                        <td class="border-4 border-violet-400">Bahia</td>
+                        <td class="border-4 border-violet-400">3</td>
+                        <td class="border-4 border-violet-400">Mexico</td>
+                        <td class="border-4 border-violet-400">mollis lectus pede et risus. Quisque libero lacus, varius et,</td>
+                    </tr>
+                    <tr  class="border-4 border-violet-400">
+                        <td class="border-4 border-violet-400">Eugenia Haney</td>
+                        <td class="border-4 border-violet-400">(327) 267-5453</td>
+                        <td class="border-4 border-violet-400">nam.porttitor@yahoo.org</td>
+                        <td class="border-4 border-violet-400">P.O. Bo 919, 9065 Nibh Street</td>
+                        <td class="border-4 border-violet-400">Bahia</td>
+                        <td class="border-4 border-violet-400">3</td>
+                        <td class="border-4 border-violet-400">Mexico</td>
+                        <td class="border-4 border-violet-400">mollis lectus pede et risus. Quisque libero lacus, varius et,</td>
+                    </tr>
+                   
+                </table>
+
+                <!-- x-if and x-show kw ander only one root par hi work karta he -->
+                <table class="border-4 border-violet-600 mt-4 mb-4 my-4 mx-4">
+                    <tr class="border-4 border-violet-400">
+                        <th class="border-4 border-violet-400">name</th>
+                        <th class="border-4 border-violet-400">phone</th>
+                        <th class="border-4 border-violet-400">email</th>
+                        <th class="border-4 border-violet-400">address</th>
+                        <th class="border-4 border-violet-400">region</th>
+                        <th class="border-4 border-violet-400">list</th>
+                        <th class="border-4 border-violet-400">country</th>
+                        <th class="border-4 border-violet-400">text</th>
+                    </tr>
+                    <tr  class="border-4 border-violet-400">
+                        <td class="border-4 border-violet-400">Eugenia Haney</td>
+                        <td class="border-4 border-violet-400">(327) 267-5453</td>
+                        <td class="border-4 border-violet-400">nam.porttitor@yahoo.org</td>
+                        <td class="border-4 border-violet-400">P.O. Bo 919, 9065 Nibh Street</td>
+                        <td class="border-4 border-violet-400">Bahia</td>
+                        <td class="border-4 border-violet-400">3</td>
+                        <td class="border-4 border-violet-400">Mexico</td>
+                        <td class="border-4 border-violet-400">mollis lectus pede et risus. Quisque libero lacus, varius et,</td>
+                    </tr>
+                    <tr  class="border-4 border-violet-400">
+                        <td class="border-4 border-violet-400">Eugenia Haney</td>
+                        <td class="border-4 border-violet-400">(327) 267-5453</td>
+                        <td class="border-4 border-violet-400">nam.porttitor@yahoo.org</td>
+                        <td class="border-4 border-violet-400">P.O. Bo 919, 9065 Nibh Street</td>
+                        <td class="border-4 border-violet-400">Bahia</td>
+                        <td class="border-4 border-violet-400">3</td>
+                        <td class="border-4 border-violet-400">Mexico</td>
+                        <td class="border-4 border-violet-400">mollis lectus pede et risus. Quisque libero lacus, varius et,</td>
+                    </tr>
+                    <tr  class="border-4 border-violet-400">
+                        <td class="border-4 border-violet-400">Eugenia Haney</td>
+                        <td class="border-4 border-violet-400">(327) 267-5453</td>
+                        <td class="border-4 border-violet-400">nam.porttitor@yahoo.org</td>
+                        <td class="border-4 border-violet-400">P.O. Bo 919, 9065 Nibh Street</td>
+                        <td class="border-4 border-violet-400">Bahia</td>
+                        <td class="border-4 border-violet-400">3</td>
+                        <td class="border-4 border-violet-400">Mexico</td>
+                        <td class="border-4 border-violet-400">mollis lectus pede et risus. Quisque libero lacus, varius et,</td>
+                    </tr>
+                    <tr  class="border-4 border-violet-400">
+                        <td class="border-4 border-violet-400">Eugenia Haney</td>
+                        <td class="border-4 border-violet-400">(327) 267-5453</td>
+                        <td class="border-4 border-violet-400">nam.porttitor@yahoo.org</td>
+                        <td class="border-4 border-violet-400">P.O. Bo 919, 9065 Nibh Street</td>
+                        <td class="border-4 border-violet-400">Bahia</td>
+                        <td class="border-4 border-violet-400">3</td>
+                        <td class="border-4 border-violet-400">Mexico</td>
+                        <td class="border-4 border-violet-400">mollis lectus pede et risus. Quisque libero lacus, varius et,</td>
+                    </tr>
+                   
+                </table>
+            </template>
+          </div>
+    </div>
+</div>
+</body>
+</html>             

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-5/6">
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">x-data</h3>
+        <div  x-data="{open:false}">
+            <button class="mt-1" @click="open=!open">Toggle Content</button>
+            <div x-show='open' 
+            x-transition:enter.duration.500ms>
+                <span>This is Toggle Content example 😍</span>
+            </div>
+        </div>
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">scoping</h3>
+        <div x-data="{
+            name:'Ankush',
+            age:35,
+            gender:'male'
+        }">
+        <div x-data="{
+            name:'Ankit',
+            age:60
+        }">
+        <div x-data="{
+            name:'Pinkesh'
+        }">
+        <p class=" mt-1  text-fuchsia-700" x-text="name"></p>
+        </div>
+        </div>
+        </div>
+
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Methods</h3>
+        <div x-data="{
+             open: false, 
+             toggle() { 
+                this.open = ! this.open 
+            } 
+            }">
+            <button class="mt-1" @click="toggle()">Toggle Content</button>
+         
+            <div x-show="open" x-transition:enter.duration.500ms>
+              Toggle by method 💕   
+            </div>
+        </div>
+        <div x-data="{
+            message: 'Click to change',
+            data: null,
+            show() {
+                this.message = 'Changed message';
+                this.data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            }
+        }"> 
+            <span class="cursor-pointer" x-text="`${message} `" @click="show()"></span>
+            <ul>
+             <template x-if="data">
+                <template x-for="p in data">
+                    <li x-text="p"></li>
+                </template>
+            </template>
+            </ul>
+        </div> 
+
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3"> Getters & Setters</h3>
+        <div x-data="{
+            open:false,
+            get isOpen(){
+                return this.open;
+            },
+            set isOpen(open){
+                this.open=open;
+            },
+            toggle(){
+                this.isOpen=!this.isOpen;
+            }
+           }">
+           <button @click="toggle">Open/Close</button>
+           <div x-show="open">
+            content.....
+           </div>
+        </div>
+        
+        <div x-data="{
+            name: 'Ankush',
+            get fullName() {
+                return this.name; 
+            },
+            set fullName(value) {
+                this.name = value; 
+            },
+            changeName() {
+               if(this.fullName==='Ankush'){
+                  this.fullName='Akshay'
+               }else{
+                this.fullName='Ankush'
+               }
+            }
+        }">
+            <p>Current name: <span x-text="fullName"></span></p>
+            <button @click="changeName">Change Name</button>
+        </div>
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Data-Less components</h3>
+        <div class="cursor-pointer mt-3" x-data @click="alert('something')">Click me</div>
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Re-usable Data</h3>
+       <div x-data="dropdown">
+        <button  @click="toggle()" class="text-3xl   mt-2">Open/close</button>
+        <div x-show="open" class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex amet quibusdam numquam sapiente a, itaque ut reprehenderit, magnam exercitationem maiores illo laborum vitae eius.</div>
+        </div>
+        <div x-data="dropdown">
+            <button @click="toggle()" class="text-3xl">Open/close</button>
+            <div x-show="open" class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex amet quibusdam numquam sapiente a, itaque ut reprehenderit, magnam exercitationem maiores illo laborum vitae eius.</div>
+        </div>
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Single-element components</h3>
+        <div x-data="{ open: true }">
+            <button @click="open = false" x-show="open">Hide Me</button>
+        </div>
+        <button x-data="{ open: true }" @click="open = false" x-show="open">
+            Hide Me
+        </button>
+    </div>
+    </div>
+    </body>
+    </html>
+
+

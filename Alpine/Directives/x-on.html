@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x-on</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-6/6">
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">x-on</h3>
+        <div x-data>
+            <button x-on:click="alert('Hello World!')">Say Hi</button>
+            <!-- Shorthand syntax -->
+            <button @click="alert('Hello World!')">Say Hi</button>
+        </div>
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">The event object</h3>
+        <div x-data>
+            <button @click="alert($event.target.getAttribute('message'))" message="Hello World">Say Hi</button>
+            <br>
+            <button @click="handleClick">handleClick</button>
+        </div>
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Keyboard events</h3>
+        <div x-data="{ message: 'type here...' }">
+            <input type="text" @keyup="alert('Submitted!')"  :placeholder="message"><br>
+            <input type="text" @keydown ="alert('Submitted!')"  :placeholder="message"><br>
+            <input type="text" @keyup.enter="alert('Submitted!')"  :placeholder="message"><br>
+            <input type="text" @keyup.shift.enter="alert('Submitted!')"  :placeholder="message"><br>
+            <input type="text" @keyup.page-down="alert('Submitted!')"  :placeholder="message"><br>
+            <input type="text" @keyup.page-up="alert('Submitted!')"  :placeholder="message"><br>
+        </div>
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Custom events</h3>
+        <div x-data @foo="alert('Button Was Clicked!')">
+            <button @click="$event.target.dispatchEvent(new CustomEvent('foo', { bubbles: true }))">Click me</button>
+        </div>
+        <div x-data @foo="alert('Button Was Clicked!')">
+            <button @click="$dispatch('foo')">Click me 😊</button>
+        </div>
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Modifiers</h3>
+        <h6 class='text-4xl font-bold mt-3'>.prevent</h6>
+            <div x-data="{ message: '' ,submittedMessage:'' }">
+                <form @submit.prevent="submitForm">
+                    <input type="text" x-model="message" @input="submittedMessage = ''" placeholder="Enter your message...">
+                    <button type="submit">Submit</button>
+            </form>
+               <p x-text="submittedMessage" :class="message ? 'text-green-600':'text-red-600'"></p>
+            </div>
+            
+        <script>
+            function submitForm() {
+                if (!this.message) {
+                    this.submittedMessage = 'Message is empty. Please enter a message.';
+                    return; // Stop form submission
+                }   
+                this.submittedMessage=this.message;
+            }
+        </script>
+        <h6 class='text-4xl font-bold mt-3'>.stop</h6>  
+        <div x-data @click="console.log('I will not get logged')">
+            <button @click.stop>Click Me</button>
+        </div>
+
+        <h6 class='text-4xl font-bold mt-3'>.outside</h6>  
+        <div x-data="{ open: false }">
+            <button @click="open = ! open">Toggle</button>
+         
+            <div x-show="open" @click.outside="open = false">
+                outside...
+            </div>
+        </div>
+        <h6 class='text-4xl font-bold mt-3'>.window</h6>  
+        <div x-data="{open:false}" @keyup.escape.window="open=!open"  >
+             <p x-show="open" x-text="'keyup.escape.window'"></p>
+        </div>
+        <div x-data="{open:false}" @keyup.enter.window="open=!open"  >
+            <p x-show="open" x-text="'keyup.enter.window'"></p>
+       </div>
+       <div x-data="{open:false}" @keyup.2.window="open=!open"  >
+        <p x-show="open" x-text="'keyup.2.window'"></p>
+      </div>
+      <h6 class='text-4xl font-bold mt-3'>.document</h6>
+      <div x-data="{open:false}" @keyup.2.window="open=!open"  >
+        <p x-show="open" x-text="'keyup.2.document'"></p>
+      </div>
+
+      <h6 class='text-4xl font-bold mt-3'>.once</h6>
+      <button x-data @click.once="console.log('I will only log once')">Click once</button>
+      <br>
+      <button x-data @click.debounce="console.log('I will only log debounce')">Click debounce</button>
+      <br>
+      <button x-data @click.debounce.100000ms="console.log('I will only log debounce with ms')">Click debounce with ms</button>
+
+
+      <h6 class='text-4xl font-bold mt-3'>.throttle</h6>
+      <button x-data @click.throttle="console.log('this is')">throttle</button>
+      <div x-data @scroll.window.throttle.750ms="handleScroll">Scroll karein...</div>
+        <script>
+            function handleScroll() {
+                console.log('Window scrolled!');
+            }
+        </script>
+
+     <h6 class='text-4xl font-bold mt-3'>.self</h6>
+     <button x-data  @click.self="handleClick">
+        Click Me
+        <img src="../HelloWord/images/image.jpeg">
+    </button>
+
+
+    <h6 class='text-4xl font-bold mt-3'>.camel</h6>
+    <button x-data @click.camel="handleCustomEvent">
+       Click me 😊
+       I dont understand
+    </button>
+    
+    <script>
+        function handleCustomEvent() {
+            console.log('Custom event triggered!');
+        }
+    </script>
+      <h6 class='text-4xl font-bold mt-3'>.dot </h6>
+      <div x-data @click.dot="handleCustomEvent">
+        Click me 😊
+        I dont understand
+      </div>
+    
+    <script>
+        function handleCustomEvent() {
+            console.log('Custom event triggered!');
+        }
+    </script>
+     <h6 class='text-4xl font-bold mt-3'>.passive  </h6>
+     <div x-data>
+     <button  @touchstart.passive="handleTouchStart">
+        I dont understand
+    </button>
+    </div>
+    
+    <script>
+        function handleTouchStart() {
+            console.log('Touch event started!');
+        }
+    </script>
+   <h6 class='text-4xl font-bold mt-3'>.capture  </h6>
+   <div x-data @click.capture="console.log('I will log first')">
+    click div 
+    <br>
+      <button @click="console.log('I will log second')">click button</button>
+  </div>
+
+
+     </div>
+</div>
+</body>
+</html>        
+        

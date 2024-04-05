@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x-teleport</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+    <style>
+        .dropdown-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto">
+      <div class="m-0 border-solid border-2 border-green-500 text-center w-full"> <!-- Changed w-6/6 to w-full -->
+          <h3 class="text-4xl font-bold text-gray-900 mt-3">x-teleport</h3>
+            <div x-data="{ isOpen: false }">
+                <button @click="isOpen = !isOpen" class="dropdown-button">Toggle Dropdown</button>
+                
+                <template x-if="isOpen" x-teleport="#Ankush-data">
+                    <div class="dropdown " >
+                        <table class="m-0 mx-auto" >
+                            <tr>
+                                <td>Item 1</td>
+                                <td>Item 2</td>
+                                <td>Item 3</td>
+                            </tr>
+                        </table>
+                    </div>
+                </template>
+            </div>
+        
+      </div>
+    </div>
+    <div class="container mx-auto">
+    <div id="Ankush-data" class=" mt-5 m-0 border-solid border-2 border-green-500 text-center w-full">
+         
+    </div>
+    </div>
+  </body>
+  
+</html>             

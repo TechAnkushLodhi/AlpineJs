@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$id</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-6/6">
+                <h3 class="text-4xl font-bold  text-gray-900 mt-3">$id</h3>
+
+                <h3 class="text-4xl font-bold  text-gray-900 mt-3">Basic usage</h3>
+
+                <div x-data>
+                    <!-- unique id for input -->
+                    <input class="border border-red-900" type="text" :id="$id('text-input')"> 
+                    <input class="border border-red-900"  type="text" :id="$id('text-input')">
+                </div>
+
+
+                <h3 class="text-4xl font-bold  text-gray-900 mt-3">Grouping with x-id</h3>
+
+                <div x-data="{ id: $id('text-input') }">
+                    <label :for="id">Input First </label><!-- "text-input-1" -->
+                    <input class="border border-red-900"  type="text" :id="id"> <!-- "text-input-1" -->
+                </div>
+                
+                <div x-data="{ id: $id('text-input') }">
+                    <label :for="id">Input Second</label> <!-- "text-input-2" -->
+                    <input class="border border-red-900"  type="text" :id="id"> <!-- "text-input-2" -->
+                </div>
+        <br><br><br>
+        <!-- To accomplish this same task in a more flexible way, you can use Alpine's x-id directive to declare an "id scope" for a set of IDs: -->
+                   <div x-data>
+                        <div x-id="['text-input-value']">
+                            <label :for="$id('text-input-value')">Input First</label> <!-- "text-input-1" -->
+                            <input  class="border border-red-900"  type="text" :id="$id('text-input-value')"> <!-- "text-input-1" -->
+                        </div>
+                        
+                        <div x-id="['text-input-value']">
+                            <label :for="$id('text-input')">Input Second</label> <!-- "text-input-2" -->
+                            <input  class="border border-red-900"  type="text" :id="$id('text-input-value')"> <!-- "text-input-2" -->
+                        </div>
+                    </div>
+
+             
+              <h3 class="text-4xl font-bold  text-gray-900 mt-3">Nesting</h3>
+                <div x-data>
+                    <div x-id="['text-input-nesting']">
+                        <label :for="$id('text-input-nesting')">First Input</label> <!-- "text-input-1" -->
+                        <input class="border border-red-900" type="text" :id="$id('text-input-nesting')"> <!-- "text-input-1" -->
+            
+                        <div x-id="['text-input-nesting']">
+                            <label :for="$id('text-input-nesting')">Second Input</label> <!-- "text-input-2" -->
+                            <input class="border border-red-900" type="text" :id="$id('text-input-nesting')"> <!-- "text-input-2" -->
+                        </div>
+                     </div>
+                </div>
+
+              <h3 class="text-4xl font-bold  text-gray-900 mt-3">Keyed IDs (For Looping)</h3>
+              <div x-data="{ activeItem: { id: 'item1' }, items: [ { id: 'item1' }, { id: 'item2' }, { id: 'item3' } ] }">
+                <ul x-id="['list-item']" :aria-activedescendant="$id('list-item', activeItem.id)">
+                    <template x-for="item in items" :key="item.id">
+                        <li :id="$id('list-item', item.id)" x-text="item.id"></li>
+                    </template>
+                </ul>  
+               </div>
+            
+               <!-- create drop down -->
+               <div x-data="{ options: ['Option 1', 'Option 2', 'Option 3'], activeIndex: null }" class="inline-block relative">
+                <button @click="activeIndex = activeIndex === null ? 0 : null" class="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none focus:bg-blue-600">Select Option</button>
+                <ul x-id="['option-item']" role="listbox" :aria-activedescendant="$id('option-item', activeIndex)" x-show="activeIndex !== null" class="absolute left-0 mt-1 bg-white border rounded w-full z-10">
+                    <template x-for="(option, index) in options" :key="index">
+                        <!-- <li  role="option" :id="$id('option-item', index+1)" @click="activeIndex = index+1" x-text="option" class="cursor-pointer px-4 py-2 hover:bg-gray-100"></li> -->
+                        <li role="option" :id="$id('option-item', index+1)" @click="activeIndex = index+1" x-text="option" x-bind:class="{ 'bg-blue-500 text-white': activeIndex === index+1, 'hover:bg-gray-100': activeIndex !== index+1 }" class="cursor-pointer px-4 py-2"></li>
+                    </template>
+                </ul>
+              </div>
+            
+
+     
+
+    
+    </div>
+</div>
+</body>
+</html>             

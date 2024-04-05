@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <style>
+        /* Optional: Styling for the pagination buttons */
+        button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div x-data="pagination">
+  <!-- Display items based on current page -->
+  <ul>
+    <template x-for="(item, index) in paginatedItems" :key="index">
+      <li x-text="item"></li>
+    </template>
+  </ul>
+
+  <!-- Pagination controls -->
+  <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
+  <span>Page <span x-text="currentPage"></span> of <span x-text="totalPages"></span></span>
+  
+  <!-- Dropdown for selecting page size -->
+  <select x-model="pageSize" @change="changeMethod">
+    <option value="2">2</option>
+    <option value="5">5</option>
+    <option value="10">10</option>
+  </select>
+
+  <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
+   <div x-text="'Products: ' + getProductRange()"></div>
+</div>
+
+<script>
+  function chunkArray(array, size) {
+    return Array.from({ length: Math.ceil(array.length / size) }, (_, index) =>
+      array.slice(index * size, index * size + size)
+    );
+  }
+document.addEventListener('alpine:init', () => {
+  Alpine.data('pagination', () => ({
+    items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9', 'Item 10', 
+            'Item 11', 'Item 12', 'Item 13', 'Item 14', 'Item 15', 'Item 16', 'Item 17', 'Item 18', 'Item 19', 'Item 20',
+            'Item 21', 'Item 22', 'Item 23', 'Item 24', 'Item 25', 'Item 26', 'Item 27', 'Item 28', 'Item 29', 'Item 30',
+            'Item 31', 'Item 32', 'Item 33', 'Item 34', 'Item 35', 'Item 36', 'Item 37', 'Item 38', 'Item 39', 'Item 40',
+            'Item 41', 'Item 42', 'Item 43', 'Item 44', 'Item 45', 'Item 46', 'Item 47', 'Item 48', 'Item 49', 'Item 50'],
+    currentPage: 1,
+    pageSize: 2, // Change this to set number of items per page
+    get totalPages() {
+      return Math.ceil(this.items.length /  parseInt(this.pageSize));
+    },
+    get paginatedItems() {
+      return chunkArray(this.items, parseInt(this.pageSize))[this.currentPage - 1];
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+    getStartItem:0,
+    getEndItem:0,
+    oldValueStartItem:0,
+   changeMethod(){ 
+    let page = Math.ceil(parseInt(this.oldValueStartItem) / parseInt(this.pageSize)); 
+    if(this.oldValueStartItem>0){
+    let page = Math.ceil(parseInt(this.oldValueStartItem) / parseInt(this.pageSize)); 
+    if(parseInt(this.getStartItem)==1){
+         this.currentPage=1;
+         return;
+    }
+    this.currentPage=page;
+    }
+
+    },
+
+     getProductRange() {  
+        const start = (this.currentPage - 1) * parseInt(this.pageSize) + 1;
+        const end = Math.min(start + parseInt(this.pageSize) - 1, this.items.length);
+        this.getStartItem=start;
+        this.getEndItem=end;
+        return start + '-' + end;
+        },
+
+       init(){
+           this.$watch('getStartItem', (value,oldValue) => {
+              this.oldValueStartItem = oldValue;
+            });
+       }    
+      
+  }));
+  });
+</script>
+
+</body>
+</html>

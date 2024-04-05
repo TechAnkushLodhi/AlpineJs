@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x-ref</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-6/6">
+         <h3 class="text-4xl font-bold  text-gray-900 mt-3">x-ref</h3>
+         <div x-data>
+            <button @click="$refs.remov.remove()" x-ref="buttonRef" class="py-2 px-5 bg-violet-500 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75">Remove Text</button>
+            <br>
+            <span x-ref="remov">Hello 👋</span>
+        </div>
+         <!-- dubble click then erorr resolve -->
+        <div x-data>
+            <button @click="removeElement" class="py-2 px-5 bg-violet-500 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75">Remove Text</button>
+            <br>
+            <span x-ref="remov">Hello 👋</span>
+        </div>    
+        <script>
+            function removeElement() {
+                if (this.$refs.remov) {
+                    this.$refs.remov.remove();
+                } else {
+                    console.log('Element not found');
+                }
+            }
+        </script>
+
+                <!-- form of alpine js -->
+
+                <h2>Alpine.js Form</h2>
+                <div x-data="{ formData: { name: '', email: '', phone: '', message: '', age: '' },  submittedData: {} ,
+                    errors:{name: '', email: '', phone: '', message: '', age: ''},
+                    validate: function(key, value){
+                        // empty validation
+                        value = value.trim();
+                        if (!value) {
+                            this.errors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)} is required.`;
+                            return true;
+                        }else{
+                            this.errors[key] ='';
+                        }
+
+                        // name validation
+                        if(key=='name'){
+                            if (value.length < 5 || value.length > 15) {
+                                this.errors[key] = 'Name must be between 5 and 15 characters.';
+                                return true;
+                            }
+                        }
+                        //email validation
+                        if(key=='email'){
+                             if(!value.match(/^[^\s@]+@gmail\.com$/)){
+                                this.errors[key] = 'Invalid email format. Please test@gmail.com';
+                                return true;
+                             }
+                        }
+                        // number validation
+                        if (key == 'phone') {
+                            if (!/^\d+$/.test(value) || value.length !== 10) {
+                                this.errors[key] = 'Phone number must contain only numbers and should be 10 digits long.';
+                                return true;
+                            } 
+                        }
+                        // age validation
+                        if (key == 'age') {
+                            if (value < 18 || value > 85) {
+                                this.errors[key] = 'Age must be between 18 and 85.';
+                                return true;
+                            } 
+                        }
+
+                        return false;
+                        
+                    },
+                    submitForm:function(){ 
+                        var value='';
+                        for( [key, value] of Object.entries(this.formData)) {
+                            let hasError = this.validate(key, value);
+                            value =hasError;
+                        }
+                        if(!value){
+                            this.submittedData = { ...this.formData };
+                        }
+                    }
+                    
+                }">
+                    <form @submit.prevent="submitForm" class="mb-4">
+                        <div>
+                            <label for="name">Name:</label>
+                            <input class="border border-sky-500 focus:outline-none" type="text" id="name" x-model="formData.name" x-bind:class="{ 'border-red-500': !formData.name }">
+                            <template x-if="errors.name">
+                            <p x-text="errors.name" class="text-red-500 focus:outline-none"></p>
+                            </template>
+                        </div>
+                        <div>
+                            <label for="email">Email:</label>
+                            <input class="border border-sky-500 focus:outline-none" type="email" id="email" x-model="formData.email" x-bind:class="{ 'border-red-500': !formData.email }">
+                            <template x-if="errors.email">
+                            <p x-text="errors.email" class="text-red-500 focus:outline-none"></p>
+                            </template>
+                        </div>
+                        <div>
+                            <label for="phone">Phone:</label>
+                            <input class="border border-sky-500 focus:outline-none" type="tel" id="phone" x-model="formData.phone" x-bind:class="{ 'border-red-500': !formData.phone }">
+                            <template x-if="errors.phone">
+                             <p x-text="errors.phone" class="text-red-500 focus:outline-none"></p>
+                          </template>
+                        </div>
+                        <div>
+                            <label for="message">Message:</label>
+                            <textarea class="border border-sky-500 focus:outline-none" id="message" x-model="formData.message" x-bind:class="{ 'border-red-500': !formData.message }"></textarea>
+                            <template x-if="errors.message">
+                            <p  x-text="errors.message" class="text-red-500 focus:outline-none"></p>
+                            </template>
+                        </div>
+                        <div>
+                            <label for="age">Age:</label>
+                            <input class="border border-sky-500 focus:outline-none" type="number" id="age" x-model="formData.age" x-bind:class="{ 'border-red-500': !formData.age }">
+                            <template x-if="errors.age">
+                            <p  x-text="errors.age" class="text-red-500 focus:outline-none"></p>
+                           </template>
+                        </div>
+                        <button class="py-2 mt-4 px-5 bg-violet-500 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75" type="submit">Submit</button>
+                    </form>
+                    <template x-if="Object.keys(submittedData).length > 0">
+                    <table  class="border-separate border-spacing-2 border border-slate-500 m-0 mx-auto">
+                        <thead>
+                            <tr>
+                                <th class="border border-slate-600">Name</th>
+                                <th class="border border-slate-600">Email</th>
+                                <th class="border border-slate-600">Phone</th>
+                                <th class="border border-slate-600">Message</th>
+                                <th class="border border-slate-600">Age</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-slate-700" x-text="submittedData.name"></td>
+                                <td class="border border-slate-700" x-text="submittedData.email"></td>
+                                <td class="border border-slate-700" x-text="submittedData.phone"></td>
+                                <td class="border border-slate-700" x-text="submittedData.message"></td>
+                                <td class="border border-slate-700" x-text="submittedData.age"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                   </template>
+                </div>
+              
+        
+    </div>
+</div>
+
+
+</body>
+</html>             

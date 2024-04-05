@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x-model</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-6/6">
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">x-model</h3>
+        <h6 class="text-2xl font-bold  text-gray-700 mt-3">input</h6>
+
+        <div x-data="{ message: '' }">
+            <input type="text"  x-model="message" class="border-indigo-500 dark:border-sky-500 border-2 border-solid mb-2">
+            <span x-text="message"></span>
+        </div>
+        <h6 class="text-2xl font-bold  text-gray-700 mt-3">changed</h6>
+        <div x-data="{ message: '' }">
+            <input type="text" x-model="message" class="border-indigo-500 dark:border-sky-500 border-2 border-solid mb-2">
+         
+            <button x-on:click="message = 'changed'">Change Message</button>
+        </div>
+        <h6 class="text-2xl font-bold  text-gray-700 mt-3">textarea</h6>
+        <div x-data="{ message: '' }">
+            <textarea x-model="message" class="border-indigo-500 dark:border-sky-500 border-2 border-solid mb-2"></textarea>
+            <span x-text="message"></span>
+        </div>
+
+        <h4 class="text-3xl font-bold  text-gray-800 mt-3">Checkbox inputs</h4>
+        <h6 class="text-2xl font-bold  text-gray-600 mt-3">Single checkbox with boolean</h6>
+        <div x-data="{show:''}">
+            <input type="checkbox" id="checkbox" x-model="show">
+            <label for="checkbox" x-text="show"></label>
+        </div>
+        <h6 class="text-2xl font-bold  text-gray-600 mt-3">Multiple checkboxes bound to array</h6>
+        <div x-data="{colors:[]}">
+        <input type="checkbox" value="red" x-model="colors">
+        <input type="checkbox" value="orange" x-model="colors">
+        <input type="checkbox" value="yellow" x-model="colors">
+        Colors: <span x-text="colors"></span>
+        </div>
+        <h6 class="text-2xl font-bold  text-gray-600 mt-3">Radio inputs</h6>
+        <div x-data="{answer:''}">
+            <input type="radio" value="yes" x-model="answer">
+            <input type="radio" value="no" x-model="answer">
+            
+            Answer: <span x-text="answer"></span>
+        </div>
+        <h4 class="text-3xl font-bold  text-gray-800 mt-3">Select inputs</h4>
+        <h6 class="text-2xl font-bold  text-gray-600 mt-3">Single select</h6>
+        <div class="mt-4" x-data="{color:''}">
+            <select  x-model="color">
+                <option>Red</option>
+                <option>Orange</option>
+                <option>Yellow</option>
+            </select>
+             
+            Color: <span x-text="color"></span>
+        </div>
+        <h6 class="text-2xl font-bold  text-gray-600 mt-3">Single select with placeholder</h6>
+        <div x-data="{color:''}">
+            <select x-model="color">
+                <option value="" disabled>Select A Color</option>
+                <option>Red</option>
+                <option>Orange</option>
+                <option>Yellow</option>
+            </select>
+             
+            Color: <span x-text="color"></span>
+        </div>
+        <h6 class="text-2xl font-bold  text-gray-600 mt-3">Multiple select</h6>
+        <div x-data="{color:''}">
+        <select x-model="color" multiple>
+            <option>Red</option>
+            <option>Orange</option>
+            <option>Yellow</option>
+        </select>
+         
+        Colors: <span x-text="color"></span>
+       </div>
+
+       <h6 class="text-2xl font-bold  text-gray-600 mt-3">Dynamically populated Select Options</h6>
+       <div x-data="{color:'' ,colors:['Red', 'Orange', 'Yellow']}">
+        <select x-model="color">
+            <option value="" disabled>Select A Color</option>
+            <template x-for="color in colors ">
+                <option x-text="color"></option>
+            </template>
+        </select>
+         
+        Color: <span x-text="color"></span>
+       </div>
+
+       <h6 class="text-2xl font-bold  text-gray-600 mt-3">Range inputs</h6>
+       <div x-data="{range:0}">
+        <input type="range" x-model="range" min="0" max="1" step="0.1">
+        <span x-text="range"></span>
+       </div>
+
+
+       <h4 class="text-3xl font-bold  text-gray-800 mt-3">Modifiers</h4>
+       <h6 class="text-2xl font-bold  text-gray-600 mt-3">.lazy</h6>
+       <div x-data="{username:''}">
+        <input type="text" x-model.lazy="username" class="border-indigo-500 dark:border-sky-500 border-2 border-solid mb-2">
+         <span x-show="username.length > 20">The username is too long.</span>
+       </div>
+
+       <h6 class="text-2xl font-bold  text-gray-600 mt-3">.number</h6>
+       <div x-data="{age:''}">
+        <input type="text" x-model.number="age" class="border-indigo-500 dark:border-sky-500 border-2 border-solid mb-2">
+        <template x-if="age">
+        <span x-text="typeof age"></span>
+       </template>
+      </div>
+
+       <h6 class="text-2xl font-bold  text-gray-600 mt-3">.boolean</h6>
+       <div x-data="{isActive:''}" class="mt-2">
+        <select x-model.boolean="isActive">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <span x-text="typeof isActive"></span>
+       </div>
+
+       <h6 class="text-2xl font-bold  text-gray-600 mt-3">.debounce</h6>
+       <div x-data="{search:''}">
+        <!-- <input type="text" x-model.debounce="search" class="border-indigo-500 dark:border-sky-500 border-2 border-solid mb-2"> -->
+        <input type="text" x-model.debounce.50000ms="search" class="border-indigo-500 dark:border-sky-500 border-2 border-solid mb-2">
+        <span x-text="search"></span>
+       </div>
+
+      <h6 class="text-2xl font-bold  text-gray-600 mt-3">.throttle</h6>
+      <div x-data="{search:''}">
+        <!-- <input type="text" x-model.throttle="search" class="border-indigo-500 dark:border-sky-500 border-2 border-solid mb-2"> -->
+        <input type="text" x-model.throttle.100ms="search" class="border-indigo-500 dark:border-sky-500 border-2 border-solid mb-2">
+        <span x-text="search"></span>
+       </div>
+
+       <h6 class="text-2xl font-bold  text-gray-600 mt-3">.fill</h6>
+       <div x-data="{ message: null }">
+        <input x-model.fill="message" value="This is the default message."  class="border-indigo-500 dark:border-sky-500 border-2 border-solid mb-2">
+        <p x-text="message"></p>
+        </div>
+
+
+       <h6 class="text-2xl font-bold  text-gray-600 mt-3">Programmatic access</h6>
+       <div x-data="{ username: 'calebporzio' }">
+        <div x-ref="div" x-model="username"></div>
+     
+        <button @click="$refs.div._x_model.set('phantomatrix')">
+            Change username to: 'phantomatrix'
+        </button>
+     
+        <span x-text="$refs.div._x_model.get()"></span>
+       </div>
+    </div>
+</div>
+</body>
+</html>       

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel slider</title>
+    <link href="
+    https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet">
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/owl.carousel@2.3.4/dist/owl.carousel.min.js"></script>
+  <style>
+    .item {
+    height: 10rem;
+    background: #4DC7A0;
+    padding: 1rem;
+
+    
+}
+
+.owl-carousel.owl-theme.owl-loaded.owl-drag {
+    background: #f1f1f1;
+}
+
+.owl-nav {text-align: center;}
+
+
+.owl-nav button span {
+    font-size: 65px;
+}
+  </style>
+</head>
+<body>
+    
+<div class="owl-carousel owl-theme">
+    <div >
+    <div class="item"><h4>1</h4></div>   
+    </div>
+</div>
+
+<script>
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:5,
+    nav:true,
+    items: 5,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:2
+        },
+        1000:{
+            items:1
+
+
+        }
+    }
+})
+    </script>
+</body>
+</html>

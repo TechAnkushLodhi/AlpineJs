@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+<!-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script> -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+  <script src="./app.js"></script>
+  <style>
+    .custom-slider {
+      background: #f1f1f1;
+      width: 100%;
+      position: relative;
+    }
+
+    .custom-slider .stage-outer {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .custom-slider .stage {
+      position: relative;
+      float: left;
+    }
+
+    .custom-slider .stage-outer .custom-item {
+      float: left;
+    }
+
+    .custom-slider .stage-outer .custom-item .item {
+      height: 10rem;
+      background: #4DC7A0;
+      padding: 1rem;
+    }
+
+    .custom-slider .nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .custom-slider .nav button {
+      padding: 6px 17px;
+      margin-left: 10px;
+      cursor: pointer;
+      background: #808080d4;
+      border: 1px solid black;
+      color: #FFF;
+    }
+  </style>
+</head>
+<body>
+<!--   <div x-data="slider">
+    <div class="custom-slider">
+      <div x-ref="StageOuter" class="stage-outer">
+        <div x-ref="MainSliderWidth" class="stage">
+          <div>
+          <template x-for="(item, index) in items" :key="item">
+            <div class="custom-item">
+              <div class="item">
+                <h4 class="content" x-text="item"></h4>
+              </div>
+            </div>
+          </template>
+          </div>
+        </div>
+      </div>
+      <div class="nav">
+        <button @click.prevent="prev" class="prev">Prev</button>
+        <button @click.prevent="next" class="next">Next</button>
+      </div>
+    </div>
+  </div> -->
+</body>
+
+<!-- <div x-data="shorting">
+  <template x-for="(value,index) in Array" :key="index">
+    <div class="item">
+      <div class="name" x-text="value.name"></div>
+      <div class="age" x-text="'Age: ' + value.age"></div>
+      <div class="gender" x-text="'Gender: ' + value.gender"></div>
+      <br>
+    </div>
+  </template>
+</div>
+ -->
+<!-- <div x-data="shorting">
+  <template x-for="(value,index) in Array" :key="index">
+    <div class="item">
+      <div class="name" x-text="value.name"></div>
+      <div class="age" x-text="'Age: ' + value.age"></div>
+      <div class="gender" x-text="'Gender: ' + value.gender"></div>
+      <div class="date" x-text="'Data: ' + value.date"></div>
+      <div class="Price" x-text="'Price: ' + value.price"></div>
+
+    </div>
+  </template>
+</div> -->
+<!-- <script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('shorting', () => ({
+      Array: [
+         { 'name': 'Ankush', 'age': 23, 'gender': 'Male' ,'date':'2023-02-06 05:10:58'  , 'price':"$54.00"},
+         { 'name': 'Priya', 'age': 28, 'gender': 'Female' ,'date':'2022-02-06 05:10:58', 'price':"$23.00"},
+         { 'name': 'Rahul', 'age': 25, 'gender': 'Male' ,'date':'2024-02-06 05:10:58', 'price':"$203.00"},
+         { 'name': 'Sonia', 'age': 30, 'gender': 'Female' ,'date':'2024-02-06 04:10:58', 'price':"$7.89"},
+         { 'name': 'Amit', 'age': 35, 'gender': 'Male' ,'date':'2023-02-06 05:20:58' , 'price':"$7.53"},
+         { 'name': 'Neha', 'age': 26, 'gender': 'Female' ,'date':'2020-02-06 05:10:58' , 'price':"$69.00"},
+         { 'name': 'Ravi', 'age': 22, 'gender': 'Male' ,'date':'2020-02-06 07:10:58' , 'price':"$1.05"},
+         { 'name': 'Pooja', 'age': 31, 'gender': 'Female'  ,'date':'2021-02-06 05:10:58', 'price':"$9.00"},
+         { 'name': 'Vikas', 'age': 29, 'gender': 'Male' ,'date':'2021-03-06 05:10:58' , 'price':"$6.00"},
+         { 'name': 'Kavita', 'age': 27, 'gender': 'Female' ,'date':'2018-01-06 05:10:58' , 'price':"$2.00"}
+      ],
+      init() {
+        this.sortArray();
+      },
+      sortArray() {
+        this.Array.sort((a, b) => parseFloat(b.price.replace('$', '')) - parseFloat(a.price.replace('$', '')));
+      }
+    }));
+  });
+</script> -->
+
+<button x-bind="SomeButton">Click</button>
+ 
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.bind('SomeButton', () => ({
+            type: 'button',
+ 
+            '@click'() {
+                this.doSomething()
+            },
+ 
+            ':disabled'() {
+                return this.shouldDisable
+            },
+        }))
+    })
+</script>
+
+
+
+</html>
+
+<!-- init() {
+        this.sortArray();
+      },
+      sortArray() {
+        this.Array.sort((a, b) => b.name.localeCompare(a.name));
+      } -->

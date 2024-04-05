@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x-init</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class="mt-3 border-solid border-2 border-green-500 text-center w-5/6">
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">x-init</h3>
+        <div x-init="console.log('init')"></div>
+        <div x-data="{
+                    init(){
+                        console.log('i am initialized');
+                    }
+                }">
+        </div>
+
+            <div x-data="{todo:{}}"
+            x-init="todo=await((await fetch('https://mocki.io/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8')).json())"
+            >
+            <template x-if="todo">
+                <template x-for="value in todo">
+                    <template x-for="(data,index) in value">
+                    <p x-text="index+':'+data"></p>
+                </template>
+            </template>
+        </template>
+        </div>
+        <br><br>
+        <div x-data x-text="await((await fetch('https://mocki.io/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8')).text())"
+        ></div>
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">$nextTick</h3>  
+        <div x-data="{ message: 'Hello, world!' }" x-init="$nextTick(() => { 
+            // This code will run after Alpine.js has completely rendered the DOM
+            console.log('DOM rendering complete');
+            // You can perform any action here, such as modifying DOM elements or accessing Alpine.js data
+              document.getElementById('myElement').classList.add('highlight');
+             })">
+            <p x-text="message"></p>
+            <div id="myElement">This element will be highlighted after rendering</div>
+        </div>
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Auto-evaluate init() method</h3>  
+        <div x-data="{
+            init() {
+                console.log('I am called automatically')
+            }
+        }">
+        </div>
+        <div
+        x-data="{
+            init() {
+                console.log('I am called first')
+            }
+        }"
+         x-init="console.log('I am called second')"
+        >
+       </div>
+       <h3 class="text-4xl font-bold  text-gray-900 mt-3">Standalone x-init</h3>
+       <div x-data>
+        <span x-init="console.log('I can initialize')"></span>
+     </div>
+     
+     <span x-init="console.log('I can initialize too')"></span>
+       
+    </div>
+</div>
+</body>
+</html>

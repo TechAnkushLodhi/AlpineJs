@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x-effect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-6/6">
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">x-effect</h3>
+        <div x-data="{ label: 'Hello' }" x-effect="label">
+            <button @click="label += ' World!'">Change Message</button>
+            <p x-text="label"></p>
+        </div>
+
+
+        <div x-data="{ label: '', clickTime: '', clickCount: 0, functionvalue: '' }"
+         x-init="() => { newFunction(label); }">
+            <button @click="label += ' World!'; clickTime = new Date().toLocaleTimeString(); clickCount++; newFunction(label);">Show Message</button>
+            <p x-text="clickTime" x-show="label"></p>
+            <p>Message: <span x-text="label" x-show="label"></span></p>
+            <p>Click count: <span x-text="clickCount" x-show="label"></span></p>
+            <p class="functionvalue" x-text="functionvalue"></p>
+        </div>
+        <script>
+            function newFunction(label) {
+                document.querySelector('.functionvalue').innerText = label;
+            }
+        </script>
+
+
+
+        <div x-data="{ count: 0 }">
+            <button @click="count++">Increment Count</button>
+            <p x-text="count"></p>
+            <p x-effect="updatePageTitle(count)"></p>
+        </div>
+        <script>
+            function updatePageTitle(count) {
+                document.title = `Count: ${count}`;
+                var title = document.title; 
+                   console.log(title);
+            }
+        </script>
+
+        
+    
+    </div>
+</div>
+</body>
+</html>             

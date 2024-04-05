@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-6/6">
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">$store</h3>
+        <div x-data="{ darkMode: $store.darkMode }" :class="{'text-red-900': darkMode.on }">
+            <button @click="$store.darkMode.toggle()">Toggle Dark Mode</button>
+            <div class="container">
+                <h1>Welcome to Dark Mode</h1>
+                <p>This is an example of dark mode using Alpine.js and Vuex.</p>
+            </div>
+        </div>
+        <div x-data :class="$store.darkMode.on && 'bg-green-100 text-fuchsia-500'">
+          <ul>
+            <li>one</li>
+            <li>two</li>
+            <li>Three</li>
+            <li>Four</li>
+            <li>Five</li>
+            <li>Six</li>
+          </ul>
+        </div>
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Single-value stores</h3>
+         <button x-data @click="$store.redMode = ! $store.redMode">Toggle Dark Mode</button>
+         <div x-data :class="$store.redMode && 'text-sky-400/100 bg-indigo-500'">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ratione magnam laboriosam.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ratione magnam laboriosam.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ratione magnam laboriosam.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ratione magnam laboriosam.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ratione magnam laboriosam.</p>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>             

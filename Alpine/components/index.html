@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine.js Component</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+   
+</head>
+<body class="bg-gray-100 p-8 text-lg">
+    <!-- Dropdown -->
+
+    <!-- <div x-data="{open:false}">
+        <button @click="open=!open" class=" inline-flex items-center py-2 px-6 bg-purple-600 hover:bg-opacity-95 text-white rounded-md shadow">Toogle
+            <svg :class="{'rotate-90':open}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-4 ml-2 transition-all">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>              
+        </button>
+        <ul x-show="open" @click.outside="open=false" x-transition class="bg-white w-[160px] shadow-md py-1 px-2">
+            <li>
+                <a class="flex items-center  py-1 px-2 hover:bg-gray-200 block" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                      </svg>
+                      
+                    Open</a>
+            </li>
+            <li>
+                <a class="flex items-center  py-1 px-2 hover:bg-gray-200 block" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                      </svg>
+                      
+                    Edit</a>
+            </li>
+            <li>
+                <a class="flex items-center py-1 px-2 hover:bg-gray-200 block" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                      </svg>
+                      
+                    Delete</a>
+            </li>
+        </ul>
+    </div> -->
+      
+
+    <!-- model -->
+
+    <div x-data="{open:false,
+              accept(){
+                console.log('yes click here');
+              }             
+    }">
+        <button @click="open=!open" class=" inline-flex items-center py-2 px-6 bg-purple-600 hover:bg-opacity-95 text-white rounded-md shadow">
+            Toogle Model            
+        </button>
+         <template x-teleport="body" >
+             <!-- backdrop -->
+        <div x-show="open "  class="flex justify-center items-center fixed left-0 right-0 top-0 bottom-0 z-10 bg-black/50 ">
+
+              
+            <!-- dialog -->
+            <div  x-show="open " x-transition @click.outside="open=false" class="w-[90%] md:w-1/2 bg-white rounded-lg">
+              <!-- model Title -->
+              <div class="py-2 px-4 text-lg font-semibold bg-gray-100 rounded-t-lg flex items-center justify-between">
+                <h1>Model Title</h1>
+                <button @click="open=false">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                      </svg>
+                </button>
+              </div>
+              <!-- model Body -->
+              <div class="p-4">
+                Model Content
+              </div>
+              <!-- medel Footer -->
+              <div class="py-2 px-4 text-lg font-semibold bg-gray-100 rounded-b-lg flex justify-end">
+                <button @click="accept()" class=" inline-flex items-center py-1 px-3 bg-emerald-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                    Accept           
+                </button>
+                <button @click="open=false" class=" ml-2 inline-flex items-center py-1 px-3 bg-gray-600 hover:bg-opacity-95 text-white rounded-md shadow">
+                   Cancle        
+                </button>
+              </div>
+            </div>
+        </div>
+         </template>
+    </div>
+
+
+    <!-- Tabs -->
+    <div x-data="{
+      tabs:['Home','Users','Settings','Orders'],
+      activeTab:'Home'
+    }">
+      <div class="flex items-center ">
+        <template x-for="tab in tabs">
+          <a  @click="activeTab=tab" x-text="tab" class="py-1 px-3 bg-white cursor-pointer border " 
+          :class="{'border-purple-500':activeTab===tab,'text-blue-500':activeTab===tab}">
+
+          </a>
+        </template>
+      </div>
+      <div class="py-2 px-3 bg-white border">
+        <!-- Home -->
+        <div x-show="activeTab==='Home'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100">
+            Home
+        </div>
+        <!-- Users -->
+        <div x-show="activeTab==='Users'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100">
+            Users
+        </div>
+        <!-- Settings -->
+        <div x-show="activeTab==='Settings'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100">
+            Settings
+        </div>
+        <!-- Orders -->
+        <div x-show="activeTab==='Orders'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100">
+          Orders
+        </div>
+    </div>
+    
+
+    </div>
+
+    <!-- carousel  -->
+    <!-- <div x-data="{
+         images:['images/1.jpg','images/2.jpg','images/3.jpeg','images/4.jpg'],
+         activeImage:null,
+         prev(){
+           let index = this.images.indexOf(this.activeImage);
+           if(index===0) 
+           index=this.images.length;
+           this.activeImage =this.images[index-1];
+         },
+         next(){
+          let index = this.images.indexOf(this.activeImage);
+          if(index===this.images.length -1) 
+          index= -1;
+          this.activeImage =this.images[index+1];
+         },
+         init(){
+            this.activeImage=this.images.length > 0 ? this.images[0] :null
+         }
+        }">
+      <div class="relative">
+            <template x-for="image in images" :key="image">
+              <div 
+                x-show="activeImage===image"
+                  class="aspect-w-2 aspect-h-1"
+                  >
+                  <img 
+                      :src="activeImage" 
+                      :alt="activeImage" 
+                      :title="activeImage"
+                      class="object-cover"
+                  >
+              </div>
+          
+            </template>
+        
+          <a @click.prevent="prev" class="cursor-pointer text-white absolute left-0 top-1/2 -translate-y-1/2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+            
+          </a>
+          <a @click.prevent="next"  class="cursor-pointer text-white absolute right-0 top-1/2 -translate-y-1/2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+            
+          </a>
+      
+          <div  class="absolute w-full flex items-center justify-center px-4">
+            <template x-for="image in images" :key="image">
+              <button class="flex-1 w-4 h-2 mt-4 mx-2 mb-0 rounded-full overflow-hidden transition-colors duration-200 ease-out hover:bg-teal-600 hover:shadow-lg" :class="{ 
+                    'bg-orange-600': activeImage === image,
+                    'bg-teal-300': activeImage !== image 
+                }" x-on:click="activeImage = image"></button>
+            </template>
+          </div>
+       
+      </div>
+
+
+    </div> -->
+  
+
+
+
+  <!-- carousel  -->
+ <!-- <div x-data="{
+  images:['images/1.jpg','images/2.jpg','images/3.jpeg','images/4.jpg'],
+  activeImage:null,
+  prev(){
+    let index = this.images.indexOf(this.activeImage);
+    if(index===0) 
+    index=this.images.length;
+    this.activeImage =this.images[index-1];
+  },
+  next(){
+   let index = this.images.indexOf(this.activeImage);
+   if(index===this.images.length -1) 
+   index= -1;
+   this.activeImage =this.images[index+1];
+  },
+  init(){
+     this.activeImage=this.images.length > 0 ? this.images[0] :null
+  }
+ }">
+<div class="relative">
+     <template x-for="image in images" :key="image">
+       <div 
+         x-show="activeImage===image"
+           class="aspect-w-2 aspect-h-1"
+           >
+           <img 
+               :src="activeImage" 
+               :alt="activeImage" 
+               :title="activeImage"
+               class="object-cover"
+           >
+          
+       </div>
+     </template>
+
+        <div class="absolute left-0 right-0 bottom-0 flex justify-center">
+          <template x-for="image in images" :key="image">
+            <button class="w-4 h-4 m-1 rounded-full border border-white transition-colors duration-200 ease-out hover:bg-teal-600 hover:border-teal-600" :class="{ 
+                  'bg-orange-600': activeImage === image,
+                  'bg-teal-300': activeImage !== image 
+              }" x-on:click="activeImage = image"></button>
+           
+          </template>
+        </div>
+   <a @click.prevent="prev" class="cursor-pointer text-white absolute left-0 top-1/2 -translate-y-1/2">
+     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+     </svg>
+     
+   </a>
+   <a @click.prevent="next"  class="cursor-pointer text-white absolute right-0 top-1/2 -translate-y-1/2">
+     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+       <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+     </svg>
+     
+   </a>
+ 
+</div>
+</div>   -->
+
+<!-- <div 
+  x-data="{
+    images:['images/1.jpg','images/2.jpg','images/3.jpeg','images/4.jpg'],
+    activeImage:null,
+    startX: 0,
+    dragging: false,
+    prev(){
+      let index = this.images.indexOf(this.activeImage);
+      if(index === 0) 
+        index = this.images.length;
+      this.activeImage = this.images[index - 1];
+    },
+    next(){
+      let index = this.images.indexOf(this.activeImage);
+      if(index === this.images.length - 1) 
+        index = -1;
+      this.activeImage = this.images[index + 1];
+    },
+    init(){
+      this.activeImage = this.images.length > 0 ? this.images[0] : null;
+    },
+    startDrag(event){
+      console.log('Start x :'+event.clientX);
+      console.log('Start Y :'+event.clientY);
+      this.startX = event.clientX;
+      this.dragging = true;
+    },
+    endDrag(){
+      this.dragging = false;
+    },
+    move(event){
+      if(!this.dragging) return;
+      const diffX = event.clientX - this.startX;
+      if(diffX > 50){
+        this.prev();
+        this.dragging = false;
+      } else if (diffX < -50){
+        this.next();
+        this.dragging = false;
+      }
+    }
+  }"
+  x-init="init"
+  @mousedown="startDrag"
+  @mouseup="endDrag"
+  @mousemove="move"
+>
+
+  <div class="relative">
+    <template x-for="image in images" :key="image">
+      <div 
+        x-show="activeImage === image"
+        class="aspect-w-2 aspect-h-1"
+      >
+        <img 
+          :src="activeImage" 
+          :alt="activeImage" 
+          :title="activeImage"
+          class="object-cover"
+        >
+      </div>
+    </template>
+
+    <div class="absolute left-0 right-0 bottom-0 flex justify-center">
+      <template x-for="image in images" :key="image">
+        <button 
+          class="w-4 h-4 m-1 rounded-full border border-white transition-colors duration-200 ease-out hover:bg-teal-600 hover:border-teal-600"
+          :class="{ 'bg-orange-600': activeImage === image, 'bg-teal-300': activeImage !== image }" 
+          x-on:click="activeImage = image"
+        ></button>
+      </template>
+    </div>
+
+    <a @click.prevent="prev" class="cursor-pointer text-white absolute left-0 top-1/2 -translate-y-1/2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+      </svg>
+    </a>
+    <a @click.prevent="next" class="cursor-pointer text-white absolute right-0 top-1/2 -translate-y-1/2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </a>
+  </div>
+</div> -->
+
+<!-- new carousel slide -->
+
+<div x-data="{
+  images:['images/1.jpg','images/2.jpg','images/3.jpeg','images/4.jpg','images/5.jpg','images/6.jpg','images/7.jpg','images/8.jpg'],
+  activeImage:0,
+  slides: [],
+  loop:true,
+  initSlides() {
+      this.$nextTick(() => {
+        this.slides = this.$refs.container.querySelectorAll('.slide');
+        this.slides.forEach((slide, index) => {
+          slide.style.left = `${index * 100}%`;
+        });
+      });
+  },
+  slideImage(){
+    this.$nextTick(() => {
+      this.slides.forEach((slide) => {
+          slide.style.transform=`translateX(-${this.activeImage * 100}%)`;
+          slide.style.transition = 'all 0.25s ease 0s';
+      });
+    });
+  },
+  prev(){
+    let lengthOfImages = this.images.length;
+     if(this.loop===true){
+        if(this.activeImage===0){
+          this.activeImage=lengthOfImages;
+          this.slideImage();
+        }
+        this.activeImage--;
+        this.slideImage();
+     }else{
+      if(!this.activeImage > 0) return;
+      this.activeImage--;
+      this.slideImage();
+     };
+  },
+  next(){
+    let lengthOfImages = this.images.length;
+    if(this.loop===true){
+      if(this.activeImage===lengthOfImages-1){
+        this.activeImage=-1;
+        this.slideImage();
+      }
+      this.activeImage++;
+      this.slideImage();
+   }else{
+    if(this.activeImage === (lengthOfImages-1)) return;
+     this.activeImage++;
+     this.slideImage();
+   };
+  },
+  init(){
+    this.initSlides();
+  }
+}"  x-ref="container">
+  <div class="relative overflow-hidden aspect-w-2 aspect-h-1">
+    <template x-for="image in images" :key="image">
+      <img 
+        :src="image" 
+        :alt="image" 
+        :title="image"
+        class="object-cover absolute slide"
+      >
+    </template>
+     <!-- buttons -->
+      <div class="buttons">
+        <div class="absolute left-0 right-0 bottom-0 flex justify-center z-50" >
+          <template x-for="(image,index) in images" :key="image">
+            <button 
+              class="w-4 h-4 m-1 rounded-full cursor-pointer border border-white transition-colors duration-200 ease-out hover:bg-teal-600 hover:border-teal-600"
+              :class="{ 'bg-orange-600': activeImage === index, 'bg-teal-300': activeImage !== index }" 
+              x-on:click="activeImage = index;  slideImage();"
+            ></button>
+          
+          </template>
+        </div>
+      </div>
+    <!-- prev & next -->
+    <div class="nav">
+      <a @click.prevent="prev" class="cursor-pointer text-white absolute left-0 top-1/2 -translate-y-1/2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+      </a>
+      <a @click.prevent="next" class="cursor-pointer text-white absolute right-0 top-1/2 -translate-y-1/2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+        </svg>
+      </a>
+    </div>
+  </div>
+
+ 
+</div>
+
+
+
+  
+
+
+
+
+
+    
+</body>
+</html>

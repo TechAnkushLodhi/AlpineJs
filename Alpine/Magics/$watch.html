@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$watch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+  <div class="container mx-auto">
+    <div class=" m-0 border-solid border-2 border-green-500 text-center  w-6/6">
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">$watch</h3>
+        <div x-data="{ open: false }" x-init="$watch('open', value => console.log(value))">
+            <button @click="open = ! open">Toggle Open</button>
+            <div x-show="open">
+                <div>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit quae ipsum vitae.
+                </div>
+            </div>
+        </div>
+
+        <div x-data="{ foo: { bar: 'baz'  }}" x-init="$watch('foo.bar', value => console.log(value))">
+            <button @click="foo.bar = 'bob'">Toggle Open</button>
+        </div>
+        <div x-data="{ foo: { bar: 'baz', baz: 'qux' } }" x-init="
+            $watch('foo.bar', value => console.log('foo.bar:', value));
+            $watch('foo.baz', value => console.log('foo.baz:', value));
+        ">
+            <button @click="foo.bar = 'bob'; foo.baz = 'quux'">Change Values</button>
+        </div>
+
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Getting the "old" value</h3>
+         <div x-data="{ open: false }">
+            <div x-init="$watch('open', (value, oldValue) => console.log('Curernt value: ' + value + ', Old value: ' + oldValue))">
+                <button @click="open = !open">Toggle Open</button>
+            </div>
+        </div>
+
+        <h3 class="text-4xl font-bold  text-gray-900 mt-3">Deep watching</h3>
+
+        <div x-data="{ foo: { bar: 'baz' }}" x-init="$watch('foo', (value, oldValue) => console.log(value, oldValue))">
+            <button @click="foo.bar = 'bob'">Update</button>
+        </div>
+
+       
+        
+
+    </div>
+</div>
+</body>
+</html>             
