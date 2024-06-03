@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reactivity</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>   
+</head>
+<body>
+
+    <h1>Alpine.reactive()</h1>
+    <script>
+          document.addEventListener('alpine:init', () => {
+            let data = { count: 1 }
+ 
+           let reactiveData = Alpine.reactive(data);
+            console.log(data.count) // 1
+            console.log(reactiveData.count) // 1
+
+            reactiveData.count = 2
+            console.log(data.count) // 2
+            console.log(reactiveData.count) // 2
+      
+        })
+    </script>
+
+<div x-data="reactiveData()">
+    <button @click="count++">Increment</button>
+    <span x-text="count"></span>
+</div>
+
+<script>
+    function reactiveData() {
+        return {
+            count: 1
+        };
+      }
+</script>
+
+
+<h1>Alpine.effect()</h1>
+
+<div x-data="">
+    
+</div>
+
+<script>
+    document.addEventListener('alpine:init',()=>{
+        let data = Alpine.reactive({ count: 1 })
+        Alpine.effect(() => {
+            console.log(data.count)
+        })
+    })
+</script>
+
+
+    <div x-data="{ count: 1 }" class="demo">
+        <button @click="count++">Increment</button>
+
+        <div>Count: <span x-text="count">3</span></div>
+    </div>
+
+    <script>
+        document.addEventListener('alpine',()=>{
+            let button = document.querySelector('button')
+            let span = document.querySelector('span')
+                    
+            let data = Alpine.reactive({ count: 1 })
+                    
+            Alpine.effect(() => {
+                span.textContent = data.count
+            })
+                    
+            button.addEventListener('click', () => {
+                data.count = data.count + 1
+            })
+        })
+    </script>
+</body>
+</html>

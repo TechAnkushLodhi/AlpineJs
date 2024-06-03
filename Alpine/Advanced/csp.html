@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'nonce-a23gbfz9e'">
+ 
+        <script defer nonce="a23gbfz9e" src="https://cdn.jsdelivr.net/npm/@alpinejs/csp@3.x.x/dist/cdn.min.js"></script>
+    </head>
+ 
+    <body>
+        <div x-data="counter">
+            <button x-on:click="increment">Click</button>
+ 
+            <span x-text="count"></span>
+        </div>
+ 
+        <script nonce="a23gbfz9e">
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('counter', () => {
+                    return {
+                        count: 1,
+ 
+                        increment() {
+                            this.count++;
+                        },
+                    }
+                })
+            })
+        </script>
+    </body>
+</html>

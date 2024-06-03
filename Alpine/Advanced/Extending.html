@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extending</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+</head>
+<body>
+    <h1>Simple Example</h1>
+    <div x-data>
+        <span x-uppercase>Hello World!</span>
+    </div>
+    
+
+    <script>
+        document.addEventListener('alpine:init',()=>{
+            Alpine.directive('uppercase', el => {
+            el.textContent = el.textContent.toUpperCase()
+           })
+        })
+    </script>
+
+    <h1>Evaluating expressions</h1>
+    <div x-data="{ message: 'Hello World!' }">
+        <div x-log="message"></div>
+        
+    </div>
+
+    <script>
+        document.addEventListener('alpine:init',()=>{
+            Alpine.directive('log', (el, { expression }, { evaluate }) => {
+             // expression === 'message'
+            console.log(
+                evaluate(expression)
+            )
+            })
+        })
+    </script>
+
+    <h1>Introducing reactivity</h1>
+
+    <div x-data="{ message: 'Hello World!' }">
+        <div x-log="message"></div>
+     
+        <button @click="message = 'yolo'">Change</button>
+    </div>
+     <script>
+        document.addEventListener('alpine:init',()=>{
+            Alpine.directive('log', (el, { expression }, { evaluateLater, effect }) => {
+                    let getThingToLog = evaluateLater(expression)
+                
+                    effect(() => {
+                        getThingToLog(thingToLog => {
+                            console.log(thingToLog)
+                        })
+                    })
+             })
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persist</title>
+    <!-- Alpine Plugins -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+ 
+    <!-- Alpine Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body >
+    <h1 style="margin:10px">$persist</h1>
+    <div x-data="{ count: $persist(0) }">
+        <button x-on:click="count++">Increment</button>
+        <span x-text="count">Setting a custom key</span>
+    </div>
+
+    <h1 style="margin:10px">Setting a custom key</h1>
+    <div x-data="{ count: $persist(0).as('second-count') }">
+        <button x-on:click="count++">Increment</button>
+        <span x-text="count"></span>
+    </div>
+
+
+
+
+    <h1 style="margin:10px">Using a custom storage</h1>
+
+    <div x-data="{ count: $persist(0).using(sessionStorage) }">
+        <button x-on:click="count++">Increment</button>
+     
+        <span x-text="count"></span>
+    </div>
+
+
+    <h1 style="margin:10px">cookies</h1>
+
+
+    <script>
+        window.cookieStorage = {
+            getItem(key) {
+                let cookies = document.cookie.split(";");
+                for (let i = 0; i < cookies.length; i++) {
+                    let cookie = cookies[i].split("=");
+                    if (key == cookie[0].trim()) {
+                        return decodeURIComponent(cookie[1]);
+                    }
+                }
+                return null;
+            },
+            setItem(key, value) {
+                document.cookie = key+' = '+encodeURIComponent(value)
+            }
+        }   
+    </script>
+     
+    <div style="margin-top: 10px;" x-data="{ count: $persist(0).using(cookieStorage) }">
+        <button x-on:click="count++">Increment</button>
+        <span x-text="count"></span>
+    </div>
+    <h1 style="margin:10px">Using $persist with Alpine.data</h1>
+
+        <div x-data="dropdown()">
+            <!-- Button to toggle dropdown -->
+            <button @click="open = !open">Toggle Dropdown</button>
+
+            <!-- Dropdown content -->
+            <div x-show="open" style="display: none; background-color: #f9f9f9; padding: 20px;">
+                <p>This is the dropdown content.</p>
+                <p>You can add more content here.</p>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('alpine:init',()=>{
+            // Define dropdown component with persisted state
+            Alpine.data('dropdown', function () {
+                return {
+                    open: this.$persist(false)
+                }
+            });
+           })
+        </script>
+</body>
+</html>

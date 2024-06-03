@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collapse</title>
+    <!-- Alpine Plugins -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Alpine Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+    
+    <h1 style="margin: 10px 0;">Collapse</h1>
+    <h3 style="margin: 10px 0;">x-collapse</h3>
+    <div x-data="{ expanded: false }" class="demo">
+        <button @click="expanded = ! expanded">Toggle Content</button>
+    
+        <div x-show="expanded" x-collapse="" style="height: auto; overflow: hidden;">
+            <div class="pt-4">
+                Reprehenderit eu excepteur ullamco esse cillum reprehenderit exercitation labore non. Dolore dolore ea dolore veniam sint in sint ex Lorem ipsum. Sint laborum deserunt deserunt amet voluptate cillum deserunt. Amet nisi pariatur sit ut id. Ipsum est minim est commodo id dolor sint id quis sint Lorem.
+            </div>
+        </div>
+    </div>
+
+
+    <h3 style="margin: 10px 0;">.duration</h3>
+    <div x-data="{ expanded: false }" class="demo">
+        <button @click="expanded = ! expanded">Toggle Content</button>
+    
+        <div x-show="expanded" x-collapse.duration.1000ms="" style="height: auto;">
+            <div class="pt-4">
+                Reprehenderit eu excepteur ullamco esse cillum reprehenderit exercitation labore non. Dolore dolore ea dolore veniam sint in sint ex Lorem ipsum. Sint laborum deserunt deserunt amet voluptate cillum deserunt. Amet nisi pariatur sit ut id. Ipsum est minim est commodo id dolor sint id quis sint Lorem.
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <h3 style="margin: 10px 0;">.min</h3>
+    <div x-data="{ expanded: false }" class="demo">
+        <button @click="expanded = ! expanded">Toggle Content</button>
+    
+        <div x-show="expanded" x-collapse.min.50px="" style="height: 20px; overflow: hidden;">
+            <div class="pt-4">
+                Reprehenderit eu excepteur ullamco esse cillum reprehenderit exercitation labore non. Dolore dolore ea
+                 dolore veniam sint in sint ex Lorem ipsum. Sint laborum deserunt deserunt amet voluptate cillum deserunt.
+                  Amet nisi pariatur sit ut id. Ipsum est minim est commodo id dolor sint id quis sint Lorem.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic consequuntur vero impedit quod
+                 repellendus alias, in nemo iste neque a iure aliquam tenetur nobis veritatis, eligendi illo 
+                 facilis optio nesciunt accusamus deserunt perferendis suscipit qui voluptatibus? Animi tenetur
+                  ad nam minima perferendis reprehenderit cum dolorem quasi maiores, quisquam qui voluptatem illo 
+                  saepe autem quam sed ut maxime quas totam harum nemo? Unde ex earum labore ut esse dolorum odio
+                   eos enim, animi quas! Accusantium placeat cum rerum, possimus consequuntur ipsum facilis quam 
+                   in dolore soluta eligendi neque id sunt dolores exercitationem eaque tempore enim libero porro 
+                   provident et obcaecati unde, doloremque nesciunt? Magni saepe vel aspernatur hic labore commodi
+                    blanditiis officia velit in mollitia est libero quae optio, suscipit nulla pariatur qui illo na
+                    m asperiores quis sunt! Iure adipisci, autem temporibus debitis officiis eligendi vel sapiente u
+                    t quasi dolores at illum architecto voluptatem id et consequatur, excepturi, enim error? Officia
+                    adipisci praesentium corrupti voluptatibus expedita eos inventore id perspiciatis, dolore ipsum?
+                     Rerum ullam porro pariatur quae corrupti incidunt asperiores fuga eligendi quisquam voluptas 
+                     laborum sapiente facere nisi explicabo libero, delectus fugit velit eius! Quas suscipit officia, 
+                     doloribus in blanditiis accusamus voluptatem ratione labore quidem quibusdam corrupti laboriosam 
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

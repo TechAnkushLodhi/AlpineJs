@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>intersect</title>
+    <!-- Alpine Plugins -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body>
+
+    <h1 style="margin:15px 0px">x-intersect</h1>
+    <div x-data="{ shown: false }" x-intersect="shown = true">
+        <div x-show="shown" x-transition>
+            I'm in the viewport!
+        </div>
+    </div>
+
+
+    <div class="demo" style="height: 60px; overflow-y: scroll;" x-data="" x-ref="root">
+        <a href="#" @click.prevent="$refs.root.scrollTo({ top: $refs.root.scrollHeight, behavior: 'smooth' })">Scroll
+            Down 👇</a>
+        <div style="height: 50vh"></div>
+        <div x-data="{ shown: false }" x-intersect="shown = true" id="yoyo">
+            <div x-show="shown" x-transition.duration.1000ms="">
+                I'm in the viewport!
+            </div>
+            <div x-show="! shown" style="display: none;">&nbsp;</div>
+        </div>
+    </div>
+
+
+
+    <h1 style="margin:15px 0px">x-intersect:enter</h1>
+
+    <div class="demo" style="height: 60px; overflow-y: scroll;" x-data="" x-ref="root">
+        <a href="#" @click.prevent="$refs.root.scrollTo({ top: $refs.root.scrollHeight, behavior: 'smooth' })">Scroll
+            Down 👇</a>
+        <div style="height: 50vh"></div>
+        <div x-data="{ shown: false }" x-intersect:enter="shown = true">
+            <div x-show="shown" x-transition.duration.1000ms="">
+                I'm in the viewport!
+            </div>
+        </div>
+    </div>
+
+
+
+    <h1 style="margin:15px 0px">x-intersect:leave</h1>
+
+    <div class="demo" style="height: 60px; overflow-y: scroll;" x-data="" x-ref="root">
+        <a href="#" @click.prevent="$refs.root.scrollTo({ top: $refs.root.scrollHeight, behavior: 'smooth' })">Scroll
+            Down 👇</a>
+        <div style="height: 50vh"></div>
+        <div x-data="{ shown: false }" x-intersect:leave="shown = true">
+            <div x-show="shown" x-transition.duration.1000ms="">
+                I'm in the viewport!
+            </div>
+        </div>
+    </div>
+
+
+
+    <h1 style="margin:15px 0px">x-intersect:leave & :start</h1>
+
+
+    <div class="demo" style="height: 60px; overflow-y: scroll;" x-data="" x-ref="root">
+        <a href="#" @click.prevent="$refs.root.scrollTo({ top: $refs.root.scrollHeight, behavior: 'smooth' })">Scroll Down 👇</a>
+        <div style="height: 50vh"></div>
+        <div x-data="{ shown: false }" x-intersect:enter="shown = true" x-intersect:leave="shown = false">
+            <div x-show="shown" x-transition.duration.1000ms="">
+                I'm in the viewport!
+            </div>
+        </div>
+    </div>
+    
+
+
+    <h1>Modifiers</h1>
+    <h3 style="margin:15px 0px"> x-intersect.once</h3>
+
+
+     
+        <div x-data="{ shown: false }"  x-intersect.once="shown = true">
+            <div x-show="shown" x-transition.duration.1000ms="">
+                I'm in the viewport!
+            </div>
+        </div>
+   
+     
+
+    <h3 style="margin:15px 0px"> x-intersect.half</h3>
+
+  
+        <div x-data="{ shown: false }" x-intersect.half="shown = true">
+            <div x-show="shown" x-transition.duration.1000ms="">
+                I'm in the viewport!
+            </div>
+        </div>
+
+
+
+    <h3 style="margin:15px 0px"> x-intersect.full</h3>
+
+        <div x-data="{ shown: false }" x-intersect.full="shown = true">
+            <div x-show="shown" x-transition.duration.1000ms="">
+                I'm in the viewport!
+            </div>
+        </div>
+
+
+    
+
+       <h3 style="margin:15px 0px"> x-intersect.threshold</h3>
+
+        <div x-data="{ shown: false }" x-intersect.threshold.50="shown = true"> 
+            <div x-show="shown" x-transition.duration.1000ms="">
+                I'm in the viewport!
+            </div>
+        </div>
+
+
+
+        <h1>x-intersect.margin</h1>
+        <div x-data="{ shown: false }"  x-intersect.margin.200px="shown = true">
+            <div x-show="shown" x-transition.duration.1000ms="">
+                I'm in the viewport!
+            </div>
+        </div> 
+
+        <div x-data="{ shown: false }"  x-intersect.margin.10%.25px.25.25px="shown = true">
+            <div x-show="shown" x-transition.duration.1000ms="">
+                I'm in the viewport!
+            </div>
+        </div> 
+
+            <div style="margin:-200px; float: left;" x-data="{ shown: true }" x-intersect.margin.-100px="shown = true">
+                <div x-show="shown" x-transition.duration.1000ms="">
+                    I'm in the viewport!
+                </div>
+            </div> 
+      
+        
+
+</body>
+
+</html>

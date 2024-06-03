@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morph</title>
+    <!-- Alpine Plugins -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/morph@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Alpine Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+    <!-- <div x-data="{ isOpen: false }"> -->
+        <!-- Button to toggle -->
+        <!-- <button @click="isOpen = !isOpen">Toggle Content</button> -->
+    
+        <!-- Original content -->
+        <!-- <div x-show="isOpen">
+            Original Content
+        </div> -->
+    
+        <!-- Morphed content -->
+        <!-- <div x-morph:hidden="isOpen">
+            Morphed Content
+        </div>
+    </div> -->
+
+
+
+
+
+    <div id="main-content" x-data="{ message: 'Change me, then press the button!' }">
+        <input type="text" x-model="message">
+        <span x-text="message"></span>
+    </div>
+     
+    <button>Run Morph</button>
+     
+    <script>
+       document.addEventListener('alpine:init', () => {
+        document.querySelector('button').addEventListener('click', () => {
+            let el = document.querySelector('div') // any div selected
+     
+            Alpine.morph(el, `
+                <div x-data="{ message: 'Change me, then press the button!' }">
+                    <h2>See how new elements have been added</h2>
+     
+                    <input type="text" x-model="message">
+                    <span x-text="message"></span>
+     
+                    <h2>but the state of this component hasn't changed? Magical.</h2>
+                </div>
+            `)
+        })
+    });
+    </script>
+
+
+
+
+
+
+<h3>Lifecycle Hooks</h3>
+
+
+
+
+<div id="container">
+    <button onclick="morphElement()">Morph Element</button>
+    <!-- Original element -->
+    <div id="original" x-data="{ message: 'Original Content' }">
+        <p x-text="message"></p>
+    </div>
+</div>
+
+<script>
+    // Function to morph the element
+    function morphElement() {
+        let el = document.getElementById('original');
+
+        // Morph options
+        let options = {
+            updating: function(el, toEl, childrenOnly, skip) {
+                console.log('Updating element:', el);
+                console.log('To element:', toEl);
+                console.log('Message:', toEl.querySelector('p').innerText);
+            },
+            updated: function(el, toEl) {
+                console.log('Updated element:', el);
+            },
+            removing: function(el, skip) {
+                console.log('Removing element:', el);
+            },
+            removed: function(el) {
+                console.log('Removed element:', el);
+            },
+            adding: function(el, skip) {
+                console.log('Adding element:', el);
+            },
+            added: function(el) {
+                console.log('Added element:', el);
+            },
+            key: function(el) {
+                return el.getAttribute('id'); // Use element's id as key
+            }
+        };
+
+        // New HTML content to morph
+        let newHTML = `
+            <div id="morphed" x-data="{ message: 'Morphed Content' }">
+                <p class="morphed" x-text="message"></p>
+            </div>
+        `;
+
+        // Morph the element
+        Alpine.morph(el, newHTML, options);
+    }
+</script>
+
+
+
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Plugin</title>
+    <!-- Alpine Plugins -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <h1 style="margin: 10px;">x-trap</h1>
+    <!-- <div x-data="{ open: false }">
+        <button @click="open = true">Open Dialog</button>
+     
+        <span x-show="open" x-trap="open">
+            <p>...</p>
+     
+            <input type="text" placeholder="Some input...">
+     
+            <input type="text" placeholder="Some other input...">
+     
+            <button @click="open = false">Close Dialog</button>
+        </span>
+    </div> -->
+
+
+
+
+
+    <div x-data="{ open: false }">
+        <!-- Button to open modal/dialog -->
+        <button @click="open = true">Open Modal</button>
+        <!-- Modal/Dialog -->
+        <div x-show="open" x-trap="open">
+            <!-- Background overlay -->
+            <div
+                style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+            </div>
+
+            <!-- Modal/Dialog content -->
+            <div
+                style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px;">
+                <h2>This is a Modal</h2>
+                <p>You can navigate using your keyboard, but focus will stay within this modal only.</p>
+                <button @click="open = false">Close Modal</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div x-data="{ open: false }">
+        <!-- Button to open modal/dialog -->
+        <button @click="open = true">Open Modal</button>
+
+        <!-- Modal/Dialog -->
+        <div x-show="open">
+            <!-- Background overlay -->
+            <div
+                style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+            </div>
+
+            <!-- Modal/Dialog content -->
+            <div
+                style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px;">
+                <h2>This is a Modal</h2>
+                <p>You can navigate using your keyboard, but focus will stay within this modal only.</p>
+                <button @click="open = false">Close Modal</button>
+            </div>
+        </div>
+    </div>
+
+    <h1 style="margin: 10px;">Nesting dialogs</h1>
+    <div x-data="{ open: false }">
+        <button @click="open = true">Open Dialog</button>
+
+        <span x-show="open" x-trap="open">
+
+            ...
+
+            <div x-data="{ open: false }">
+                <button @click="open = true">Open Nested Dialog</button>
+
+                <span x-show="open" x-trap="open">
+
+                    ...
+
+                    <button @click="open = false">Close Nested Dialog</button>
+                </span>
+            </div>
+
+            <button @click="open = false">Close Dialog</button>
+        </span>
+    </div>
+
+
+    <h1 style="margin: 10px;">Modifiers</h1>
+    <h3>.inert</h3>
+
+    <div x-data="{ open: false }">
+        <!-- Button to toggle modal/dialog -->
+        <button @click="open = !open">Toggle Modal</button>
+
+        <!-- Modal/Dialog -->
+        <div x-show="open"
+            style="background-color: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; display: flex; justify-content: center; align-items: center;">
+            <div x-trap.inert="open" style="background-color: white; padding: 20px; border-radius: 5px;">
+                <h2>This is a Modal</h2>
+                <p>You can navigate using your keyboard.</p>
+                <button @click="open = false">Close Modal</button>
+            </div>
+        </div>
+    </div>
+    <h3 style="margin: 10px;">.noscroll</h3>
+    <!-- use lorem content5000 and then check -->
+    <div x-data="{ open: false }">
+        <button @click="open = !open">Open Dialog</button>
+
+        <div x-show="open" x-trap.noscroll="open">
+            Dialog Contents
+
+            <button @click="open = false">Close Dialog</button>
+        </div>
+    </div>
+
+    <h3 style="margin: 10px;">.noreturn</h3>
+    <div class="demo">
+        <div x-data="{ open: false }" x-trap.noreturn="open" @click.outside="open = false"
+            @keyup.escape.prevent.stop="open = false">
+            <input type="search" placeholder="search for something" @focus="open = true"
+                @keyup.escape.prevent="$el.blur()">
+
+            <div x-show="open">
+                <div class="mb-4 text-bold">Search results</div>
+
+                <p class="mb-4 text-gray-600 text-sm">Notice when closing this dropdown, focus is not returned to the
+                    input.</p>
+
+                <button class="mt-4" @click="open = false">Close Dialog</button>
+            </div>
+        </div>
+    </div>
+    <h3 style="margin: 10px;">.noautofocus</h3>
+
+
+    <div x-data="{ open: false }">
+        <!-- Button to toggle modal/dialog -->
+        <button @click="open = !open">Toggle Modal</button>
+
+        <!-- Modal/Dialog -->
+        <div x-show="open"
+            style="background-color: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; display: flex; justify-content: center; align-items: center;">
+            <div x-trap.noautofocus="open" style="background-color: white; padding: 20px; border-radius: 5px;">
+                <h2>This is a Modal</h2>
+                <p>You can navigate using your keyboard.</p>
+                <!-- No autofocus input field -->
+                <input type="text" placeholder="Type something...">
+                <button @click="open = false">Close Modal</button>
+            </div>
+        </div>
+    </div>
+
+
+    <h1 style="margin: 10px;">$focus</h1>
+
+    <h3 style="margin: 10px;">next()</h3>
+    <h3 style="margin: 10px;">previous()</h3>
+
+    <div class="demo">
+        <div x-data="" @keydown.right="$focus.next()" @keydown.left="$focus.previous()">
+            <button class="focus:outline-none focus:ring-2 focus:ring-cyan-400">First</button>
+            <button class="focus:outline-none focus:ring-2 focus:ring-cyan-400">Second</button>
+            <button class="focus:outline-none focus:ring-2 focus:ring-cyan-400">Third</button>
+        </div>
+        (Click a button, then use the arrow keys to move left and right)
+    </div>
+
+    <h3 style="margin: 10px;">.wrap()</h3>
+    <div class="demo">
+        <div x-data="" @keydown.right="$focus.wrap().next()" @keydown.left="$focus.wrap().previous()">
+            <button class="focus:outline-none focus:ring-2 focus:ring-cyan-400">First</button>
+            <button class="focus:outline-none focus:ring-2 focus:ring-cyan-400">Second</button>
+            <button class="focus:outline-none focus:ring-2 focus:ring-cyan-400">Third</button>
+        </div>
+        (Click a button, then use the arrow keys to move left and right)
+    </div>
+
+
+    <h3 style="margin: 10px;">.within</h3>
+    <div class="demo" x-data="">
+        <button @click="$focus.within($refs.buttons).first()">Focus "First"</button>
+        <button @click="$focus.within($refs.buttons).last()">Focus "Last"</button>
+
+        <hr class="mt-2 mb-2">
+
+        <div x-ref="buttons" @keydown.right="$focus.wrap().next()" @keydown.left="$focus.wrap().previous()">
+            <button class="focus:outline-none focus:ring-2 focus:ring-cyan-400" >First</button>
+            <button class="focus:outline-none focus:ring-2 focus:ring-cyan-400" >Second</button>
+            <button class="focus:outline-none focus:ring-2 focus:ring-cyan-400" >Third</button>
+        </div>
+    </div>
+
+
+    <div x-data>
+        <!-- Element to focus -->
+        <input type="text" x-ref="myInput">
+        
+        <!-- Button to focus the input -->
+        <button @click="$focus.focus($refs.myInput)">Focus Input</button>
+        
+    </div>
+    
+
+    
+    
+
+</body>
+
+</html>
